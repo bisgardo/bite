@@ -65,12 +65,23 @@ public class Shorts {
 	}
 	
 	public static short fromBinary(String binary) {
-		// TODO Implement (trivial) optimized solution.
-		int result = Integer.parseInt(binary, 2);
-		if (result >> WIDTH != 0) {
+		short result = 0;
+		int length = binary.length();
+		if (length > WIDTH) {
 			throw new NumberFormatException();
 		}
-		return (short) result;
+		
+		//noinspection Duplicates
+		for (int index = 0; index < length; index++) {
+			result <<= 1;
+			char digit = binary.charAt(index);
+			if (digit == '1') {
+				result |= 1;
+			} else if (digit != '0') {
+				throw new NumberFormatException();
+			}
+		}
+		return result;
 	}
 	
 	public static String toBinary(short value) {

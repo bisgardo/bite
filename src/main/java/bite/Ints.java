@@ -95,12 +95,23 @@ public class Ints {
 	}
 	
 	public static int fromBinary(String binary) {
-		// TODO Implement (trivial) optimized solution.
-		long result = Long.parseLong(binary, 2);
-		if (result >> WIDTH != 0) {
+		int result = 0;
+		int length = binary.length();
+		if (length > WIDTH) {
 			throw new NumberFormatException();
 		}
-		return (int) result;
+		
+		//noinspection Duplicates
+		for (int index = 0; index < length; index++) {
+			result <<= 1;
+			char digit = binary.charAt(index);
+			if (digit == '1') {
+				result |= 1;
+			} else if (digit != '0') {
+				throw new NumberFormatException();
+			}
+		}
+		return result;
 	}
 	
 	public static String toBinary(int value) {

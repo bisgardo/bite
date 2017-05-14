@@ -13,9 +13,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		
-		<!--<java.version>1.2</java.version>-->
-		<java.version>1.5</java.version>
-		<java-test.version>1.8</java-test.version>
+		<java.version>1.2</java.version>
+		<java-test.version>1.5</java-test.version>
 		
 		<!-- LIBRARIES -->
 		

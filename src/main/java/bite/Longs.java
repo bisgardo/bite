@@ -1,7 +1,5 @@
 package bite;
 
-import java.math.BigInteger;
-
 public class Longs {
 	public static final int WIDTH = 64;
 	
@@ -154,18 +152,23 @@ public class Longs {
 	}
 	
 	public static long fromBinary(String binary) {
-		// TODO Implement (trivial) optimized solution.
-		try {
-			return Long.parseLong(binary, 2);
-		} catch (NumberFormatException e) {
-			// Fall back to solution that works when
-			// the sign bit is set.
-			BigInteger bigInteger = new BigInteger(binary, 2);
-			if (!bigInteger.shiftRight(WIDTH).equals(BigInteger.ZERO)) {
+		long result = 0;
+		int length = binary.length();
+		if (length > WIDTH) {
+			throw new NumberFormatException();
+		}
+		
+		//noinspection Duplicates
+		for (int index = 0; index < length; index++) {
+			result <<= 1;
+			char digit = binary.charAt(index);
+			if (digit == '1') {
+				result |= 1;
+			} else if (digit != '0') {
 				throw new NumberFormatException();
 			}
-			return bigInteger.longValue();
 		}
+		return result;
 	}
 	
 	public static String toBinary(long value) {
